@@ -2,16 +2,13 @@
 
 set -e
 
-if [ -z ${VIRTUAL_ENV+x} ]
+ACTIVATE_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/env/bin/activate"
+if [ -f "$ACTIVATE_SCRIPT" ]
 then
-	ACTIVATE_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/env/bin/activate"
-	if [ -f "$ACTIVATE_SCRIPT" ]
-	then
-		source $ACTIVATE_SCRIPT
-	else
-		echo "$ACTIVATE_SCRIPT not found.  Did you follow documentation to install dependencies?"
-		exit 1
-	fi
+	source $ACTIVATE_SCRIPT
+else
+	echo "$ACTIVATE_SCRIPT not found.  Did you follow documentation to install dependencies?"
+	exit 1
 fi
 
 SKIP_TAGS="_null encrypted"
